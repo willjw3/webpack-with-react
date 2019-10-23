@@ -2,6 +2,17 @@ const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/",
+        filename: "bundle.js"
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "./public/template.html",
+            filename: "index.html"
+        })
+    ],
     module: {
         rules: [
           {
@@ -11,7 +22,10 @@ module.exports = {
           },
           { 
               test: /\.(css)$/, 
-              use: ["style-loader", "css-loader"] 
+              use: [
+                  "style-loader",
+                  "css-loader"
+              ] 
           },
           {
             test: /\.(png|jpg|gif)$/i,
@@ -30,17 +44,6 @@ module.exports = {
     resolve: {
         extensions: ["*", ".js", ".jsx"]
     },
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        publicPath: "/",
-        filename: "bundle.js"
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./public/template.html",
-            filename: "index.html"
-        })
-    ],
     devServer: {
         contentBase: "./dist"
     }
